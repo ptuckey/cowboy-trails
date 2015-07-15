@@ -1,0 +1,4 @@
+%% encoding: UTF-8
+{application,trails}.
+{packages,[]}.
+{modules,[trails,trails_app,trails_handler,trails_sup]}.

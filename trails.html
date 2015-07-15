@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module trails</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module trails</h1>
+<ul class="index"><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+
+
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-metadata">metadata()</a></h3>
+<p><tt>metadata() = #{<a href="#type-method">method()</a> =&gt; #{}}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-method">method()</a></h3>
+<p><tt>method() = get | put | post | delete | patch | head | options</tt></p>
+
+
+<h3 class="typedecl"><a name="type-route_match">route_match()</a></h3>
+<p><tt>route_match() = '_' | iodata()</tt></p>
+
+
+<h3 class="typedecl"><a name="type-route_path">route_path()</a></h3>
+<p><tt>route_path() = {Path::<a href="#type-route_match">route_match()</a>, Handler::module(), Opts::any()} | {Path::<a href="#type-route_match">route_match()</a>, <a href="cowboy_router.html#type-constraints">cowboy_router:constraints()</a>, Handler::module(), Opts::any()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-trail">trail()</a></h3>
+<p><b>abstract datatype</b>: <tt>trail()</tt></p>
+
+
+<h3 class="typedecl"><a name="type-trails">trails()</a></h3>
+<p><tt>trails() = [<a href="trails.html#type-trail">trails:trail()</a> | <a href="#type-route_path">route_path()</a>]</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#all-0">all/0</a></td><td>Retrieves all stored trails.</td></tr>
+<tr><td valign="top"><a href="#compile-1">compile/1</a></td><td>Compiles the given list of trails routes, also compatible with
+       <code>cowboy</code> routes.</td></tr>
+<tr><td valign="top"><a href="#constraints-1">constraints/1</a></td><td>Gets the <code>constraints</code> from the given <code>trail</code>.</td></tr>
+<tr><td valign="top"><a href="#handler-1">handler/1</a></td><td>Gets the <code>handler</code> from the given <code>trail</code>.</td></tr>
+<tr><td valign="top"><a href="#metadata-1">metadata/1</a></td><td>Gets the <code>metadata</code> from the given <code>trail</code>.</td></tr>
+<tr><td valign="top"><a href="#options-1">options/1</a></td><td>Gets the <code>options</code> from the given <code>trail</code>.</td></tr>
+<tr><td valign="top"><a href="#path_match-1">path_match/1</a></td><td>Gets the <code>path_match</code> from the given <code>trail</code>.</td></tr>
+<tr><td valign="top"><a href="#retrieve-1">retrieve/1</a></td><td>Fetch the trail that matches with the given path.</td></tr>
+<tr><td valign="top"><a href="#single_host_compile-1">single_host_compile/1</a></td><td>Equivalent to <a href="#compile-1"><tt>compile([{'_', Trails}])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#store-1">store/1</a></td><td>Store the given list of trails.</td></tr>
+<tr><td valign="top"><a href="#trail-2">trail/2</a></td><td>Equivalent to <a href="#trail-5"><tt>trail(PathMatch, ModuleHandler, [], #{}, [])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#trail-3">trail/3</a></td><td>Equivalent to <a href="#trail-5"><tt>trail(PathMatch, ModuleHandler, Options, #{}, [])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#trail-4">trail/4</a></td><td>Equivalent to <a href="#trail-5"><tt>trail(PathMatch, ModuleHandler, Options, MetaData, [])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#trail-5">trail/5</a></td><td>This function allows you to add additional information to the
+       <code>cowboy</code> handler, such as: resource path, handler module,
+       options and metadata.</td></tr>
+<tr><td valign="top"><a href="#trails-1">trails/1</a></td><td>This function allows you to define the routes on each resource handler,
+       instead of defining them all in one place (as you're required to do
+       with <code>cowboy</code>).</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="all-0">all/0</a></h3>
+<div class="spec">
+<p><tt>all() -&gt; [<a href="#type-trail">trail()</a>]</tt><br></p>
+</div><p>Retrieves all stored trails.</p>
+
+<h3 class="function"><a name="compile-1">compile/1</a></h3>
+<div class="spec">
+<p><tt>compile(Routes::[{Host::<a href="#type-route_match">route_match()</a>, Trails::<a href="#type-trails">trails()</a>}]) -&gt; <a href="cowboy_router.html#type-dispatch_rules">cowboy_router:dispatch_rules()</a></tt><br></p>
+</div><p>Compiles the given list of trails routes, also compatible with
+       <code>cowboy</code> routes.</p>
+
+<h3 class="function"><a name="constraints-1">constraints/1</a></h3>
+<div class="spec">
+<p><tt>constraints(Trail::#{}) -&gt; list()</tt><br></p>
+</div><p>Gets the <code>constraints</code> from the given <code>trail</code>.</p>
+
+<h3 class="function"><a name="handler-1">handler/1</a></h3>
+<div class="spec">
+<p><tt>handler(Trail::#{}) -&gt; module()</tt><br></p>
+</div><p>Gets the <code>handler</code> from the given <code>trail</code>.</p>
+
+<h3 class="function"><a name="metadata-1">metadata/1</a></h3>
+<div class="spec">
+<p><tt>metadata(Trail::#{}) -&gt; #{}</tt><br></p>
+</div><p>Gets the <code>metadata</code> from the given <code>trail</code>.</p>
+
+<h3 class="function"><a name="options-1">options/1</a></h3>
+<div class="spec">
+<p><tt>options(Trail::#{}) -&gt; list()</tt><br></p>
+</div><p>Gets the <code>options</code> from the given <code>trail</code>.</p>
+
+<h3 class="function"><a name="path_match-1">path_match/1</a></h3>
+<div class="spec">
+<p><tt>path_match(Trail::#{}) -&gt; string() | binary()</tt><br></p>
+</div><p>Gets the <code>path_match</code> from the given <code>trail</code>.</p>
+
+<h3 class="function"><a name="retrieve-1">retrieve/1</a></h3>
+<div class="spec">
+<p><tt>retrieve(Path::<a href="#type-route_match">route_match()</a>) -&gt; <a href="#type-trail">trail()</a></tt><br></p>
+</div><p>Fetch the trail that matches with the given path.</p>
+
+<h3 class="function"><a name="single_host_compile-1">single_host_compile/1</a></h3>
+<div class="spec">
+<p><tt>single_host_compile(Trails::[<a href="#type-route_path">route_path()</a>]) -&gt; <a href="cowboy_router.html#type-dispatch_rules">cowboy_router:dispatch_rules()</a></tt><br></p>
+</div><p>Equivalent to <a href="#compile-1"><tt>compile([{'_', Trails}])</tt></a>.</p>
+
+
+<h3 class="function"><a name="store-1">store/1</a></h3>
+<div class="spec">
+<p><tt>store(Trails::[<a href="#type-trail">trail()</a>]) -&gt; ok</tt><br></p>
+</div><p>Store the given list of trails.</p>
+
+<h3 class="function"><a name="trail-2">trail/2</a></h3>
+<div class="spec">
+<p><tt>trail(PathMatch::<a href="#type-route_match">route_match()</a>, ModuleHandler::module()) -&gt; <a href="#type-trail">trail()</a></tt><br></p>
+</div><p>Equivalent to <a href="#trail-5"><tt>trail(PathMatch, ModuleHandler, [], #{}, [])</tt></a>.</p>
+
+
+<h3 class="function"><a name="trail-3">trail/3</a></h3>
+<div class="spec">
+<p><tt>trail(PathMatch::<a href="#type-route_match">route_match()</a>, ModuleHandler::module(), Options::any()) -&gt; <a href="#type-trail">trail()</a></tt><br></p>
+</div><p>Equivalent to <a href="#trail-5"><tt>trail(PathMatch, ModuleHandler, Options, #{}, [])</tt></a>.</p>
+
+
+<h3 class="function"><a name="trail-4">trail/4</a></h3>
+<div class="spec">
+<p><tt>trail(PathMatch::<a href="#type-route_match">route_match()</a>, ModuleHandler::module(), Options::any(), MetaData::#{}) -&gt; <a href="#type-trail">trail()</a></tt><br></p>
+</div><p>Equivalent to <a href="#trail-5"><tt>trail(PathMatch, ModuleHandler, Options, MetaData, [])</tt></a>.</p>
+
+
+<h3 class="function"><a name="trail-5">trail/5</a></h3>
+<div class="spec">
+<p><tt>trail(PathMatch::<a href="#type-route_match">route_match()</a>, ModuleHandler::module(), Options::any(), MetaData::#{}, Constraints::<a href="cowboy_router.html#type-constraints">cowboy_router:constraints()</a>) -&gt; <a href="#type-trail">trail()</a></tt><br></p>
+</div><p>This function allows you to add additional information to the
+       <code>cowboy</code> handler, such as: resource path, handler module,
+       options and metadata. Normally used to document handlers.</p>
+
+<h3 class="function"><a name="trails-1">trails/1</a></h3>
+<div class="spec">
+<p><tt>trails(Handlers::module() | [module()]) -&gt; <a href="cowboy_router.html#type-routes">cowboy_router:routes()</a></tt><br></p>
+</div><p>This function allows you to define the routes on each resource handler,
+       instead of defining them all in one place (as you're required to do
+       with <code>cowboy</code>). Your handler must implement the callback <code>trails/0</code>
+       and return the specific routes for that handler. That callback is
+       invoked for each given module and then the results are concatenated.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jul 15 2015, 10:39:16.</i></p>
+</body>
+</html>
